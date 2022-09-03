@@ -13,8 +13,10 @@ app.use(morgan("dev")); //para que se vean bien los cosole logs :D del servidor
 // app.use(cors()); //esto es opcional aunque creo que no se necesita por ahora
 
 /** constantes para las rutas */
+const EncuestadosRoutes = require("./rutasApis/encuestados");
 
 //Routes
+app.use("/encuestados", EncuestadosRoutes);
 
 //Static files
 app.use(express.static(path.join(__dirname, "public")));

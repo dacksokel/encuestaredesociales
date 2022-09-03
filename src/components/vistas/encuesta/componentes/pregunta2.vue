@@ -28,7 +28,7 @@
                     <img :src="redes.imagen" :alt="redes.nombre">
                   </div>
                   <div class="tiempoRed">
-                    <p>Ingresa el tiempo que le dedicas a estas redes sociales:</p>
+                    <p>Tiempo promedio al día que usas {{redes.nombre}}:</p>
                     <p>
                       <input type="number" placeholder="ingresa el tiempo que le dedicas a estas redes sociales" v-model="redes.tiempo">
                     </p>

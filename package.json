@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "concurrently npm:dev-server npm:webpack",
-    "dev-server": "nodemon --watch server index.js",
+    "dev-server": "nodemon server.js",
     "dev-client": "webpack-dev-server --mode development",
     "prod": "webpack --mode production",
     "webpack": "webpack --watch --mode development --config  webpack.config.js",
