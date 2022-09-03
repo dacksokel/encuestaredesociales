@@ -6,13 +6,12 @@
         <h3>
             se refrescara en 5s, puede tambien revisar la seccion de estatidistacas
         </h3>
-
     </div>
 </template>
 
 <script>
 export default {
-    props: ['encuestado'],
+    props: ['encuestado',"done"],
     async mounted() {
         console.log('datos encuestado ', this.encuestado)
         let res = await fetch(`/encuestados/crearEncuestado`, {
@@ -28,9 +27,9 @@ export default {
         if(dato.respuesta){
             console.log('todo bien ')
         }
-        // setTimeout(() => {
-        //     window.location.reload() //esto se ejecutara  una vez que sean guardado los datos  
-        // }, 5000);
+        setTimeout(() => {
+            window.location.reload() //esto se ejecutara  una vez que sean guardado los datos  
+        }, 5000);
     }
 }
 </script>

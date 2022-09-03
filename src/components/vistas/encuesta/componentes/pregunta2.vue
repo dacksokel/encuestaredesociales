@@ -45,14 +45,14 @@
 
     </div>
     <div>
-      <button @click="refrescar">Terminar</button>
+      <button v-if="!done" @click="refrescar">Terminar</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props:['siguiente'],
+  props:['siguiente',"done", "datosE"],
   data() {
     return {
       favorita: '',
@@ -116,6 +116,12 @@ export default {
         },
       ]
     }
+  },
+  mounted(){
+    if(this.done){
+          this.favorita = this.datosE.redfav
+          this.listaRedesSociales2 = this.datosE.redesTiempo
+        }
   },
   methods: {
     refrescar() {
