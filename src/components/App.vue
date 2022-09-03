@@ -1,14 +1,21 @@
 <template>
-  <div>
-    <h1>{{title}}</h1>
-    <div>
-      esta es la descripcion :
-      {{description}}
+   <header>
+
+    <div class="wrapper">
+
+      <nav>
+        <RouterLink to="/">Encuesta</RouterLink>
+        <RouterLink to="/estadisticas">Estadisticas</RouterLink>
+      </nav>
     </div>
-    </div>
+  </header>
+
+  <RouterView />
   </template>
   
   <script>
+    import { RouterLink, RouterView } from 'vue-router'
+
     export default {
       data() {
         return {
@@ -18,4 +25,6 @@
       }
     }
   </script>
-  
+  <style>
+    
+  </style>
