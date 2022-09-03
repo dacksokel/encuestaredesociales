@@ -19,6 +19,12 @@ const EncuestadosRoutes = require("./rutasApis/encuestados");
 
 //Routes
 app.use("/encuestados", EncuestadosRoutes);
+app.use('/estadisticas', (req,res)=>{
+  // esto es solo porque es una version de comprobacion de conocimineot 
+  // si fuera una version completa o de trabajo esto deberia redireccionar a las estadisticas de vue
+  // 
+  res.redirect('/')
+})
 
 //Static files
 app.use(express.static(path.join(__dirname, "public")));
