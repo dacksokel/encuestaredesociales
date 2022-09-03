@@ -1,5 +1,5 @@
 <template>
-   <header>
+  <header>
 
     <div class="wrapper">
 
@@ -11,20 +11,19 @@
   </header>
 
   <RouterView />
-  </template>
+</template>
   
   <script>
-    import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 
-    export default {
-      data() {
-        return {
-          title: 'Hello World',
-          description:'ahahahahaha work'
-        }
-      }
+export default {
+  data() {
+    return {
+      title: 'Hello World',
+      description: 'ahahahahaha work'
     }
-  </script>
+  }
+}
+</script>
   <style>
-    
   </style>
