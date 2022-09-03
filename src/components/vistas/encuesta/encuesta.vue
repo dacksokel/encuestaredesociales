@@ -7,8 +7,9 @@
       esto se guardara en una base de dato, ya que el usuario contara con la opcion de editar sus datos si coloca el mismo correo
     -->
     <Start v-if="!start" v-on:start="start_encuestas" />
-    <Pregunta1 v-if="pregunta1V"  v-on:siguiente="pregunta1_encuesta" />
-    <Pregunta2 v-if="pregunta2V"/>
+    <Pregunta1 v-if="pregunta1V" v-on:siguiente="pregunta1_encuesta" />
+    <Pregunta2 v-if="pregunta2V" v-on:siguiente="graciasActivo" />
+    <Gracias v-if="graciasV" :encuestado="encuestado"/>
 
   </div>
 </template>
@@ -17,6 +18,7 @@
 import Start from './componentes/start.vue'
 import Pregunta1 from './componentes/pregunta1.vue'
 import Pregunta2 from './componentes/pregunta2.vue'
+import Gracias from './componentes/gracias.vue'
 
 export default {
   data() {
@@ -24,23 +26,41 @@ export default {
       start: false,
       pregunta1V: false,
       pregunta2V: false,
+      graciasV: false,
+      encuestado: {
+        correo: '',
+        nombre: '',
+        edad: '',
+        sexo: '',
+        redfav: '',
+        redesTiempo: {}
+      }
     }
   },
-  components:{
+  components: {
     Start,
-    Pregunta1,  
-    Pregunta2,  
-},
+    Pregunta1,
+    Pregunta2,
+    Gracias
+  },
   methods: {
     start_encuestas() {
       this.start = !this.start
-      console.log("🚀 ~ file: encuesta.vue ~ line 33 ~ start_encuestas ~ start", this.start)
       this.pregunta1V = true
     },
-    pregunta1_encuesta(){
+    pregunta1_encuesta(nombre, correo, edadRango, sexo) {
+      this.encuestado.nombre = nombre
+      this.encuestado.correo = correo
+      this.encuestado.edad = edadRango
+      this.encuestado.sexo = sexo
       this.pregunta1V = !this.pregunta1V
-      console.log("🚀 ~ file: encuesta.vue ~ line 38 ~ pregunta1_encuesta ~ this.pregunta1V ", this.pregunta1V )
       this.pregunta2V = true
+    },
+    graciasActivo(fav, tiempoRed) {
+      this.encuestado.redfav = fav
+      this.encuestado.redesTiempo = tiempoRed
+      this.pregunta2V = false
+      this.graciasV = true
     }
   }
 }

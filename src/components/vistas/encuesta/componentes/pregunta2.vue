@@ -22,8 +22,21 @@
           </header>
           <div>
             <ul>
-              <li>
-                
+              <li v-for="(redes, index) in listaRedesSociales2" :key="index">
+                <div>
+                  <div class="imagen">
+                    <img :src="redes.imagen" :alt="redes.nombre">
+                  </div>
+                  <div class="tiempoRed">
+                    <p>Ingresa el tiempo que le dedicas a estas redes sociales:</p>
+                    <p>
+                      <input type="number" placeholder="ingresa el tiempo que le dedicas a estas redes sociales" v-model="redes.tiempo">
+                    </p>
+                  </div>
+                </div>
+                <!-- <div>
+                  <button @click="refrescar">Guardar Datos</button>
+                </div> -->
               </li>
             </ul>
           </div>
@@ -39,6 +52,7 @@
 
 <script>
 export default {
+  props:['siguiente'],
   data() {
     return {
       favorita: '',
@@ -106,11 +120,37 @@ export default {
   methods: {
     refrescar() {
       // una vez terminado la encuesta y que todas las cosas se hayan enviado a la api entoces se refrescara la pagina
-      window.location.reload()
+      this.$emit('siguiente', this.favorita, this.listaRedesSociales2)
+    },  
+    timepoEnRedes(redes){
+    console.log("🚀 ~ file: pregunta2.vue ~ line 125 ~ timepoEnRedes ~ redes", redes)
+    console.log(redes.tiempo)
+    console.log(redes.nombre)   
+
     }
   }
 }
 </script>
 
 <style>
+  li{
+    width: 15%;
+    display: inline-block;
+    vertical-align: bottom;    
+    text-align: center;
+  }
+  .imagen{
+    width: 25%;
+    margin: 0.5px auto;
+    padding: 0;
+  }
+  .imagen img{
+    width: 99%;  
+  }
+.tiempoRed{
+  width: 85%;
+}
+  .tiempoRed input{
+    width: 99%;    
+  }
 </style>

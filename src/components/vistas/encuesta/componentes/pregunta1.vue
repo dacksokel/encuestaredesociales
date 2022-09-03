@@ -58,8 +58,10 @@ export default {
 },
     mounted(){},
     methods:{
-        guardar_datos(){
-            this.$emit('siguiente')            
+        guardar_datos(){ 
+            //con esto tambien se le pasa del usuario al padre y con eso entonces podemos mantener un stado bbase 
+            // que no es el ma scorrecto pero para no complicar las cosas con un gestor de stados esto es mas practico
+            this.$emit('siguiente',this.nombre, this.correo, this.edadRango, this.sexo)            
         }
     }
 }

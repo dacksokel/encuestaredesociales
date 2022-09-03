@@ -19,8 +19,6 @@ import { RouterLink, RouterView } from 'vue-router'
 export default {
   data() {
     return {
-      title: 'Hello World',
-      description: 'ahahahahaha work'
     }
   }
 }
