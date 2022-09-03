@@ -28,12 +28,12 @@ export default {
       pregunta2V: false,
       graciasV: false,
       encuestado: {
-        correo: '',
-        nombre: '',
-        edad: '',
-        sexo: '',
-        redfav: '',
-        redesTiempo: {}
+        correo: 'prueba@prueba.com',
+        nombre: 'prueba',
+        edad: '123',
+        sexo: 'f',
+        redfav: 'adasd',
+        redesTiempo: {hola:'caho'}
       }
     }
   },

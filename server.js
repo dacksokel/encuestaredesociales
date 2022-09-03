@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
 const { mongoose } = require("./database");
@@ -11,6 +12,7 @@ app.set("port", process.env.PORT || 2000);
 //Middleware --> funciones que se ejecuntan antes de llegar a las rutas
 app.use(morgan("dev")); //para que se vean bien los cosole logs :D del servidor
 // app.use(cors()); //esto es opcional aunque creo que no se necesita por ahora
+app.use(express.json())
 
 /** constantes para las rutas */
 const EncuestadosRoutes = require("./rutasApis/encuestados");
