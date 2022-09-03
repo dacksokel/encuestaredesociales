@@ -8,40 +8,43 @@
     <section>
       <div>
         <p>
-          Total de Encuestados: {{totalEcuestados}}
+          Total de Encuestados: {{ totalEcuestados }}
         </p>
       </div>
       <div>
-        <Chart/>
+        <h2>Tiempo promedio por red social</h2>
+        <Chart />
       </div>
     </section>
   </div>
 </template>
 
 <script>
-  import Chart from './componentes/chart.vue'
+import Chart from './componentes/chart.vue'
 export default {
-  
-  data(){
-    return{
-      totalEcuestados:''
+
+  data() {
+    return {
+      totalEcuestados: '',
+      
     }
   },
-  components:{
+  components: {
     Chart
   },
-  async mounted(){
+  async mounted() {
     // acontinuacion llamamos a una apis para que nos suuministren de los datos necesarios para crear las estadisticas
     this.totalEncuestados()
   },
-  methods:{
-    async totalEncuestados(){
+  methods: {
+    async totalEncuestados() {
       // cantidad de encuentasdos
       let res = await fetch('/encuestados')
       let datos = await res.json()
 
-      this.totalEcuestados = datos.cantidad      
-    }
+      this.totalEcuestados = datos.cantidad
+    },
+   
   }
 
 }
