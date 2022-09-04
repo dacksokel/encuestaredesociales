@@ -18,6 +18,16 @@
           </h2>
           <Chart2 />
         </div>
+        <div>
+          <h2>
+            Rango de edad que más use cada red social
+          </h2>
+          <ol>
+            <li v-for="(redSocial, edades) in edadesrango" :key="index">
+              {{edades}}:{{redSocial}}
+            </li>
+          </ol>
+        </div>
       </div>
     </section>
   </div>
@@ -30,6 +40,7 @@ export default {
   data() {
     return {
       totalEcuestados: "",
+      edadesrango:{}
     };
   },
   components: {
@@ -39,6 +50,10 @@ export default {
   async mounted() {
     // acontinuacion llamamos a una apis para que nos suuministren de los datos necesarios para crear las estadisticas
     this.totalEncuestados();
+    // aqui llamamos a las edades por rango para generar una lista de las mismas
+    let res = await fetch("/encuestados/edadrango");
+    let datos = await res.json();
+    this.edadesrango = datos
   },
   methods: {
     async totalEncuestados() {
