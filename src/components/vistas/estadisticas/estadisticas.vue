@@ -23,7 +23,7 @@
             Rango de edad que más use cada red social
           </h2>
           <ol>
-            <li v-for="(redSocial, edades) in edadesrango" :key="index">
+            <li v-for="(redSocial, edades) in edadesrango" :key="edades">
               {{edades}}:{{redSocial}}
             </li>
           </ol>
@@ -67,13 +67,14 @@ export default {
 </script>
 
 <style>
-  #graficas{
-    width: 99%;
-  }
-  #graficas div{
-    width: 45%;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-  }
+#graficas {
+  width: 99%;
+}
+
+#graficas div {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
 </style>
