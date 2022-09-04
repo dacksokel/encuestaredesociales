@@ -39,7 +39,7 @@
             </form>
         </div>
         <div>
-            <button v-if="!done" @click="guardar_datos">Siguiente</button>
+            <button v-if="!done" @click="guardar_datos" class="btn btn-primary">Siguiente</button>
         </div>
     </div>
 </template>

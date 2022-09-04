@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="conteEstadisticas">
     <header>
       <h1>Estadisticas de la encuestas</h1>
     </header>
@@ -67,14 +67,30 @@ export default {
 </script>
 
 <style>
+  #conteEstadisticas{
+    text-align: center;
+    padding: .5em;
+    margin: 0.5em;
+    width: 99%;
+
+  }
+  header{
+    background:#F7F7EE;
+  }
 #graficas {
   width: 99%;
 }
-
+p{
+  font-size: 30px;
+  font-weight: bold;
+}
 #graficas div {
   width: 45%;
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   text-align: center;
+  margin: .25em;
+  padding:.5em;
+  box-shadow: 1px 1px 4px;
 }
 </style>

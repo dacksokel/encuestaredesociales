@@ -16,7 +16,7 @@
                 </p>
             </div>
             <div>
-                <button @click="validarCorreo">
+                <button @click="validarCorreo" class="btn btn-primary">
                     Start Encuesta
                 </button>
             </div>
@@ -47,4 +47,16 @@ export default {
 </script>
 
 <style>
+h1 {
+    padding: 1em;
+}
+
+h3 {
+    padding: .5em;
+}
+
+p {
+    font-size: 30px;
+    font-weight: bold;
+}
 </style>

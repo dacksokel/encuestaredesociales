@@ -7,14 +7,14 @@
         </h1>
       </header>
       <section>
-        <div>
+        <div id="redfav">
           <label for="edad">Elija su red Social favorita:</label>
   
           <select name="redSocialfavorita" id="redSocialfavorita" v-model="favorita">
             <option v-for="(redSocial, index) in listaRedesSociales" :key="index" v-bind:value="redSocial">{{ redSocial }}</option>
           </select>
         </div>
-        <div>
+        <div >
           <header>
             <h3>
               En las siguientes redes Sociales Cuanto tiempo pasas en el dia:
@@ -45,7 +45,7 @@
 
     </div>
     <div>
-      <button v-if="!done" @click="refrescar">Terminar</button>
+      <button v-if="!done" @click="refrescar" class="btn btn-success">Terminar</button>
     </div>
   </div>
 </template>
@@ -139,6 +139,11 @@ export default {
 </script>
 
 <style>
+  #redfav{
+    font-size: 30px;
+    font-weight: bold;
+    background: #F2E9C9;
+  }
   li{
     width: 15%;
     display: inline-block;
@@ -153,8 +158,13 @@ export default {
   .imagen img{
     width: 99%;  
   }
-.tiempoRed{
-  width: 85%;
+  .tiempoRed{
+    width: 85%;
+    
+  }
+  .tiempoRed p {
+    
+    font-size: 18px;
 }
   .tiempoRed input{
     width: 99%;    

@@ -1,5 +1,5 @@
 <template>
-  <div id="contenedor">
+  <div id="conteEncuesta">
     <!-- aqui se iran poniendo los componentes de encuestas que son 3 basicamente uno para dar 
       comienzo a la prueba, otro para preguntar correo Nombre del usuario edad y sexo del participante
       en el ultimo sera un catalogo de redes sociales, las cuales tambien se podra agregar redes sociales quie no estan dentro de la lista
@@ -89,4 +89,12 @@ export default {
 </script>
 
 <style>
+  #conteEncuesta{
+    text-align: center;
+    margin: .5em;
+    padding: .5em;
+  }
+  header{
+    background:#F7F7EE;
+  }
 </style>
