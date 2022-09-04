@@ -73,6 +73,7 @@ router.get("/promedioredesociales", async (req, res) => {
 router.get("/fav", async (req, res) => {
   let datos = await Encuestados.find();
   datos = datos.map((e) => e.redfav);
+  // esta funcion crea un nuevo objeto donde dice la cantidad de veces que se repiten las cosas o los datos dentro de un array
   const resultado = datos.reduce(
     (prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev),
     {}
@@ -108,9 +109,13 @@ router.get("/fav", async (req, res) => {
 });
 
 router.get("/edadrango", async (req, res)=>{
+  // creo que esta api es mejor que la que hice de primera de las redes sociales para sacar el promedio 
+  // pero bueno diferentes caminos llevan al mismo destino :D
   let datos = await Encuestados.find();
   let edadRango = {}; // esta es el objeto que contendra los datos para calcular los rangos de las edades
-
+// con este ciclo sacamos la edad y la armacenamos en un objeto de arreglos
+// donde el nombre de cada objeto es la edad y los arreglos que son el valor de cada rango de edad son las redes sociales
+// a mayor cantidad de concurrencias de redes sociales mejor asi luego pasa al siguiente paso
   for (const encuesta of datos) {
     let redsocial = '', numeroMayor = 0, edad = encuesta.edad
     let object = encuesta.redesTiempo
@@ -119,10 +124,11 @@ router.get("/edadrango", async (req, res)=>{
         const element = object[key];
         if(numeroMayor == 0){
           numeroMayor = element.tiempo
+          redsocial = element.nombre
         }
         if(element.tiempo > numeroMayor){
           numeroMayor = element.tiempo
-          redsocial = element.nombre
+          redsocial = element.nombre          
         }
       }
     }
@@ -130,10 +136,22 @@ router.get("/edadrango", async (req, res)=>{
       edadRango[edad].push(redsocial)
     }else{
       edadRango[edad] = []
-      edadRango[edad].push(redsocial)
-      
+      edadRango[edad].push(redsocial)      
     }
   }
+
+  // ahora esos datos los tomamos y validamos la cantidad de concurrencia de una red social en el objeto de edadRango
+  for (const edades in edadRango) {
+    // con este ciclo voy a restructurar el objeto edadRango   
+   const resultado = edadRango[edades].reduce(
+     (prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev),
+     {}
+   );   
+  edadRango[edades]  = resultado
+}
+
+console.log("🚀 ~ file: encuestados.js ~ line 153 ~ router.get ~ edadRango", edadRango)
+  return res.json(edadRango)
 
 })
 
