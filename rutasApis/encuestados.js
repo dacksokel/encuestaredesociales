@@ -66,7 +66,7 @@ router.get("/promedioredesociales", async (req, res) => {
     tiktok: parseFloat(ti / tiktok.length).toFixed(2),
   };
   res.json({
-    promedio:promedios
+    promedio: promedios,
   });
 });
 
@@ -108,52 +108,69 @@ router.get("/fav", async (req, res) => {
   });
 });
 
-router.get("/edadrango", async (req, res)=>{
-  // creo que esta api es mejor que la que hice de primera de las redes sociales para sacar el promedio 
+router.get("/edadrango", async (req, res) => {
+  // creo que esta api es mejor que la que hice de primera de las redes sociales para sacar el promedio
   // pero bueno diferentes caminos llevan al mismo destino :D
   let datos = await Encuestados.find();
   let edadRango = {}; // esta es el objeto que contendra los datos para calcular los rangos de las edades
-// con este ciclo sacamos la edad y la armacenamos en un objeto de arreglos
-// donde el nombre de cada objeto es la edad y los arreglos que son el valor de cada rango de edad son las redes sociales
-// a mayor cantidad de concurrencias de redes sociales mejor asi luego pasa al siguiente paso
+  // con este ciclo sacamos la edad y la armacenamos en un objeto de arreglos
+  // donde el nombre de cada objeto es la edad y los arreglos que son el valor de cada rango de edad son las redes sociales
+  // a mayor cantidad de concurrencias de redes sociales mejor asi luego pasa al siguiente paso
   for (const encuesta of datos) {
-    let redsocial = '', numeroMayor = 0, edad = encuesta.edad
-    let object = encuesta.redesTiempo
+    let redsocial = "",
+      numeroMayor = 0,
+      edad = encuesta.edad;
+    let object = encuesta.redesTiempo;
     for (const key in object) {
       if (Object.hasOwnProperty.call(object, key)) {
         const element = object[key];
-        if(numeroMayor == 0){
-          numeroMayor = element.tiempo
-          redsocial = element.nombre
+        if (numeroMayor == 0) {
+          numeroMayor = element.tiempo;
+          redsocial = element.nombre;
         }
-        if(element.tiempo > numeroMayor){
-          numeroMayor = element.tiempo
-          redsocial = element.nombre          
+        if (element.tiempo > numeroMayor) {
+          numeroMayor = element.tiempo;
+          redsocial = element.nombre;
         }
       }
     }
-    if(edadRango[edad] != undefined){
-      edadRango[edad].push(redsocial)
-    }else{
-      edadRango[edad] = []
-      edadRango[edad].push(redsocial)      
+    if (edadRango[edad] != undefined) {
+      edadRango[edad].push(redsocial);
+    } else {
+      edadRango[edad] = [];
+      edadRango[edad].push(redsocial);
     }
   }
 
   // ahora esos datos los tomamos y validamos la cantidad de concurrencia de una red social en el objeto de edadRango
   for (const edades in edadRango) {
-    // con este ciclo voy a restructurar el objeto edadRango   
-   const resultado = edadRango[edades].reduce(
-     (prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev),
-     {}
-   );   
-  edadRango[edades]  = resultado
-}
+    // con este ciclo voy a restructurar el objeto edadRango
+    edadRango[edades] = edadRango[edades].reduce(
+      (prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev),
+      {}
+    );
+  }
+  // ahora se determina la red social que mas usan los de rango y listo tambien se restructura el dato de edad rango
 
-console.log("🚀 ~ file: encuestados.js ~ line 153 ~ router.get ~ edadRango", edadRango)
-  return res.json(edadRango)
-
-})
+  for (const edades in edadRango) {
+    let numeroMayor = 0,
+      nombreRed;
+    for (const red in edadRango[edades]) {
+      let nombreRed2 = red,
+        numeroRed = edadRango[edades][red];
+      if (numeroMayor == 0) {
+        numeroMayor = numeroRed;
+        nombreRed = nombreRed2;
+      }
+      if (numeroRed > numeroMayor) {
+        numeroMayor = numeroRed;
+        nombreRed = nombreRed2;
+      }
+    }
+    edadRango[edades] = nombreRed;
+  }
+  return res.json(edadRango);
+});
 
 // apis posts
 
