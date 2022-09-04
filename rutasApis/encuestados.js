@@ -126,15 +126,11 @@ router.get("/edadrango", async (req, res)=>{
         }
       }
     }
-    console.log("🚀 ~ file: encuestados.js ~ line 127 ~ router.get ~ edad", edad)
-    console.log("🚀 ~ file: encuestados.js ~ line 126 ~ router.get ~ redsocial", redsocial)
     if(edadRango[edad] != undefined){
       edadRango[edad].push(redsocial)
-      console.log("🚀 ~ file: encuestados.js ~ line 134 ~ router.get ~ edadRango", edadRango)
     }else{
       edadRango[edad] = []
       edadRango[edad].push(redsocial)
-      console.log("🚀 ~ file: encuestados.js ~ line 137 ~ router.get ~ edadRango", edadRango)
       
     }
   }
