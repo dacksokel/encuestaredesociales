@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const { ElementTypes } = require("@vue/compiler-core");
 // modelo
 const Encuestados = require("../modelos/encuestado");
 
@@ -105,6 +106,40 @@ router.get("/fav", async (req, res) => {
     nopopular: redMenosfav,
   });
 });
+
+router.get("/edadrango", async (req, res)=>{
+  let datos = await Encuestados.find();
+  let edadRango = {}; // esta es el objeto que contendra los datos para calcular los rangos de las edades
+
+  for (const encuesta of datos) {
+    let redsocial = '', numeroMayor = 0, edad = encuesta.edad
+    let object = encuesta.redesTiempo
+    for (const key in object) {
+      if (Object.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        if(numeroMayor == 0){
+          numeroMayor = element.tiempo
+        }
+        if(element.tiempo > numeroMayor){
+          numeroMayor = element.tiempo
+          redsocial = element.nombre
+        }
+      }
+    }
+    console.log("🚀 ~ file: encuestados.js ~ line 127 ~ router.get ~ edad", edad)
+    console.log("🚀 ~ file: encuestados.js ~ line 126 ~ router.get ~ redsocial", redsocial)
+    if(edadRango[edad] != undefined){
+      edadRango[edad].push(redsocial)
+      console.log("🚀 ~ file: encuestados.js ~ line 134 ~ router.get ~ edadRango", edadRango)
+    }else{
+      edadRango[edad] = []
+      edadRango[edad].push(redsocial)
+      console.log("🚀 ~ file: encuestados.js ~ line 137 ~ router.get ~ edadRango", edadRango)
+      
+    }
+  }
+
+})
 
 // apis posts
 
