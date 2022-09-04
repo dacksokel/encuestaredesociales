@@ -18,7 +18,7 @@
           </h2>
           <Chart2 />
         </div>
-        <div>
+        <div id="largo">
           <h2>
             Rango de edad que más use cada red social
           </h2>
