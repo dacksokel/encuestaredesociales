@@ -80,11 +80,9 @@
               let res = await fetch('/encuestados/promedioredesociales')
               let dato = await res.json()
   
-              this.promediosT = dato
+              this.promediosT = dato.promedio
               let datosArray = [this.promediosT.facebook, this.promediosT.whatsapp,this.promediosT.twitter, this.promediosT.instagram, this.promediosT.tiktok]              
-              this.chartData.datasets[0].data = datosArray
-              console.log("🚀 ~ file: chart.vue ~ line 85 ~ promediostiempo ~ this.chartData.datasets", this.chartData.datasets)
-              console.log("🚀 ~ file: estadisticas.vue ~ line 51 ~ promediostiempo ~ this.promediosT ", this.promediosT)
+              this.chartData.datasets[0].data = datosArray        
           }
       }
   }

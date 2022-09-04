@@ -57,12 +57,15 @@ router.get("/promedioredesociales", async (req, res) => {
     (previousValue, currentValue) => previousValue + currentValue
   );
 
-  res.json({
+  let promedios = {
     facebook: parseFloat(f / facebook.length).toFixed(2),
     whatsapp: parseFloat(w / whatsapp.length).toFixed(2),
     twitter: parseFloat(t / twitter.length).toFixed(2),
     instagram: parseFloat(i / instagram.length).toFixed(2),
     tiktok: parseFloat(ti / tiktok.length).toFixed(2),
+  };
+  res.json({
+    promedio:promedios
   });
 });
 
@@ -99,7 +102,7 @@ router.get("/fav", async (req, res) => {
   res.json({
     estadisticas: resultado,
     favorita: redFavorita,
-    nopopular: redMenosfav
+    nopopular: redMenosfav,
   });
 });
 
