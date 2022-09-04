@@ -5,7 +5,7 @@
   "author": "dacksokel",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "dev": "concurrently npm:dev-server npm:webpack",
     "dev-server": "nodemon server.js",
     "dev-client": "webpack-dev-server --mode development",
