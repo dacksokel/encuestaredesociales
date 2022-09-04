@@ -3,6 +3,7 @@ const router = require("express").Router();
 // modelo
 const Encuestados = require("../modelos/encuestado");
 
+// apis gets
 router.get("/", async (req, res) => {
   let encuentas = await Encuestados.find().count();
   res.json({
@@ -64,6 +65,45 @@ router.get("/promedioredesociales", async (req, res) => {
     tiktok: parseFloat(ti / tiktok.length).toFixed(2),
   });
 });
+
+router.get("/fav", async (req, res) => {
+  let datos = await Encuestados.find();
+  datos = datos.map((e) => e.redfav);
+  const resultado = datos.reduce(
+    (prev, cur) => ((prev[cur] = prev[cur] + 1 || 1), prev),
+    {}
+  );
+  let redFavorita = "";
+  let redMenosfav = "";
+  let numeroMayor = 0,
+    numeroMenor = 0;
+
+  for (const key in resultado) {
+    if (Object.hasOwnProperty.call(resultado, key)) {
+      const elemento = resultado[key];
+      if (numeroMayor == 0) {
+        numeroMenor = elemento;
+        numeroMayor = elemento;
+      }
+      if (elemento >= numeroMayor) {
+        numeroMayor = elemento;
+        redFavorita = key;
+      }
+      if (numeroMenor >= elemento) {
+        numeroMenor = elemento;
+        redMenosfav = key;
+      }
+    }
+  }
+
+  res.json({
+    estadisticas: resultado,
+    favorita: redFavorita,
+    nopopular: redMenosfav
+  });
+});
+
+// apis posts
 
 router.post("/crearEncuestado", async (req, res) => {
   // con esta api creamos al encuestado el cual no se podra repetir
