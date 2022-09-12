@@ -34,6 +34,7 @@ app.use('/send',async (req, res)=>{
 // Crea el transportador con la configuración requerida para Gmail
 // cambia el usuario y pasa!
 var transporter = nodemailer.createTransport({
+    service: 'gmail',
     host: 'smtp.gmail.com',
     port: 465,
     secure: true, // use SSL
