@@ -60,6 +60,7 @@ transporter.sendMail(mailOptions, function(error, info){
 
     console.log('Message sent: ' + info.response);
 });
+res.send('enviando')
 })
 
 //Static files
