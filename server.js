@@ -5,6 +5,8 @@ const app = express();
 const cors = require("cors");
 const { mongoose } = require("./database");
 const path = require("path");
+const nodemailer = require('nodemailer');
+
 
 //Setting puerto
 app.set("port", process.env.PORT || 2000);
@@ -28,7 +30,6 @@ app.use('/estadisticas', (req,res)=>{
 app.use('/send',async (req, res)=>{
   console.log('iniciando envio de correo')
 
-  var nodemailer = require('nodemailer');
 
 // Crea el transportador con la configuración requerida para Gmail
 // cambia el usuario y pasa!
