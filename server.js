@@ -25,6 +25,42 @@ app.use('/estadisticas', (req,res)=>{
   // 
   res.redirect('/')
 })
+app.use('/send',async (req, res)=>{
+  console.log('iniciando envio de correo')
+
+  var nodemailer = require('nodemailer');
+
+// Crea el transportador con la configuración requerida para Gmail
+// cambia el usuario y pasa!
+var transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
+    auth: {
+        user: 'caballitotrabajador@gmail.com',
+        pass: 'caballitotrabajador1234567890'
+    }
+});
+
+
+// configurar datos de correo electrónico
+var mailOptions = {
+    from: '"Our Code World " <caballitotrabajador@gmail.com>', // dirección del remitente (quién envía)
+    to: 'dacksokel@gmail.com, sokealongeer@hotmail.com', // lista de receptores (quién recibe)
+    subject: 'Hello', // Línea de asunto
+    text: 'Hello world ', //cuerpo de texto plano
+    html: '<b>Hello world </b><br> This is the first email sent with Nodemailer in Node.js' // cuerpo html
+};
+
+// enviar correo con objeto de transporte definido
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        return console.log(error);
+    }
+
+    console.log('Message sent: ' + info.response);
+});
+})
 
 //Static files
 app.use(express.static(path.join(__dirname, "public")));
