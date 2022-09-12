@@ -27,7 +27,7 @@ app.use('/estadisticas', (req,res)=>{
   // 
   res.redirect('/')
 })
-app.use('/send',async (req, res)=>{
+app.use('/send/:correo',async (req, res)=>{
   console.log('iniciando envio de correo')
 
 
@@ -48,7 +48,7 @@ var transporter = nodemailer.createTransport({
 // configurar datos de correo electrónico
 var mailOptions = {
     from: 'caballitotrabajador@gmail.com', // dirección del remitente (quién envía)
-    to: 'dacksokel@gmail.com, sokealongeer@hotmail.com', // lista de receptores (quién recibe)
+    to: req.params.correo, // lista de receptores (quién recibe)
     subject: 'Hello', // Línea de asunto
     text: 'Hello world ', //cuerpo de texto plano
     html: '<b>Hello world </b><br> This is the first email sent with Nodemailer in Node.js' // cuerpo html
