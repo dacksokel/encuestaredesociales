@@ -46,7 +46,7 @@ var transporter = nodemailer.createTransport({
 
 // configurar datos de correo electrónico
 var mailOptions = {
-    from: '"Our Code World " <caballitotrabajador@gmail.com>', // dirección del remitente (quién envía)
+    from: 'caballitotrabajador@gmail.com', // dirección del remitente (quién envía)
     to: 'dacksokel@gmail.com, sokealongeer@hotmail.com', // lista de receptores (quién recibe)
     subject: 'Hello', // Línea de asunto
     text: 'Hello world ', //cuerpo de texto plano
